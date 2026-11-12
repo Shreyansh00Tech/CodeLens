@@ -1,0 +1,181 @@
+:root {
+  --peach: #FFE8D6;
+  --peach-deep: #FFD9BC;
+  --ink: #100D0B;
+  --panel: #1A1614;
+  --white: #FFFFFF;
+  --coral: #FF5A36;
+  --muted-dark: #6B5F57;
+  --muted-light: #A79A90;
+  --border-dark: rgba(16,13,11,0.12);
+  --border-light: rgba(255,255,255,0.1);
+}
+
+* { box-sizing: border-box; }
+
+.ca-app {
+  background: var(--ink); color: var(--white);
+  height: 100vh; display: flex; flex-direction: column;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ── HEADER (peach — matches landing nav) ── */
+.ca-header {
+  display: flex; align-items: center; gap: 1.2rem;
+  padding: 1rem 1.6rem;
+  background: rgba(255,232,214,0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-dark);
+}
+.ca-logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.15rem; color: var(--ink); }
+.ca-logo-accent { color: var(--coral); }
+
+.ca-repo-wrap { flex: 1; max-width: 480px; }
+
+.ca-focus-btn {
+  background: var(--ink); color: var(--peach); border: none;
+  padding: 0.55rem 1.2rem; border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-weight: 500;
+  cursor: pointer; transition: 0.2s;
+}
+.ca-focus-btn.off { background: transparent; border: 1.5px solid var(--border-dark); color: var(--muted-dark); }
+.ca-focus-btn:hover { background: var(--coral); color: var(--white); }
+
+.ca-depth { display: flex; align-items: center; gap: 0.6rem; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--muted-dark); }
+.ca-depth input[type="range"] { accent-color: var(--coral); width: 90px; }
+.ca-depth-val { color: var(--ink); font-weight: 600; }
+
+.ca-db-logout {
+  background: transparent; border: 1.5px solid var(--border-dark); color: var(--muted-dark);
+  padding: 0.55rem 1.1rem; border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; cursor: pointer; transition: 0.2s;
+}
+.ca-db-logout:hover { border-color: var(--coral); color: var(--ink); }
+
+/* ── MAIN (dark workspace) ── */
+.ca-main { flex: 1; display: flex; overflow: hidden; }
+
+.ca-graph { flex: 1; position: relative; background: var(--ink); }
+
+.ca-empty, .ca-loading {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 1rem; color: var(--muted-light);
+}
+.ca-empty-icon { opacity: 0.7; }
+.ca-empty p, .ca-loading p { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; }
+
+.ca-loading-dots { display: flex; gap: 0.4rem; }
+.ca-loading-dots span {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--coral);
+  animation: dot-pulse 1.2s ease-in-out infinite;
+}
+.ca-loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+.ca-loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes dot-pulse { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.1); } }
+
+/* ── SIDEBAR ── */
+.ca-sidebar {
+  width: 320px; background: var(--panel); border-left: 1px solid var(--border-light);
+  display: flex; flex-direction: column; overflow-y: auto;
+}
+.ca-sidebar-head { padding: 1rem 1.3rem; border-bottom: 1px solid var(--border-light); }
+.ca-sidebar-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--white); }
+.ca-sidebar-body { padding: 1.2rem 1.3rem; }
+
+.ca-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--coral); margin: 1.1rem 0 0.5rem;
+}
+.ca-label:first-child { margin-top: 0; }
+
+.ca-filepath { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; word-break: break-all; color: var(--white); }
+
+.ca-copy {
+  background: transparent; border: 1px solid var(--border-light); color: var(--muted-light);
+  padding: 0.2rem 0.6rem; border-radius: 100px; font-size: 0.72rem; cursor: pointer; transition: 0.2s;
+}
+.ca-copy:hover { border-color: var(--coral); color: var(--white); }
+
+.ca-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.4rem; }
+.ca-list li { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--muted-light); display: flex; gap: 0.5rem; word-break: break-all; }
+.ca-list .arrow { color: var(--coral); }
+.ca-list .arrow-back { color: var(--peach-deep); }
+
+/* ── REPO INPUT ── */
+.ca-repo-input-wrap { display: flex; gap: 0.6rem; }
+.ca-repo-input {
+  flex: 1; background: var(--white); border: 1.5px solid var(--border-dark); color: var(--ink);
+  padding: 0.55rem 0.9rem; border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.82rem;
+  outline: none; transition: border-color 0.2s;
+}
+.ca-repo-input::placeholder { color: var(--muted-dark); }
+.ca-repo-input:focus { border-color: var(--coral); }
+.ca-repo-btn {
+  background: var(--coral); color: var(--white); border: none;
+  padding: 0.55rem 1.3rem; border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; font-weight: 500;
+  cursor: pointer; transition: 0.2s; white-space: nowrap;
+}
+.ca-repo-btn:hover { background: #ff7a5c; transform: translateY(-1px); }
+
+/* ── EDITOR ── */
+.ca-editor {
+  position: fixed; bottom: 0; left: 0; right: 0; height: 320px;
+  background: var(--ink); border-top: 1px solid var(--border-light);
+  display: flex; flex-direction: column; z-index: 20;
+}
+.ca-editor-tab { display: flex; align-items: center; gap: 0.6rem; padding: 0.6rem 1rem; background: var(--panel); border-bottom: 1px solid var(--border-light); }
+.ca-editor-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--coral); }
+.ca-editor-name { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--muted-light); }
+.ca-editor-body { flex: 1; overflow: hidden; }
+
+/* ── AMBIENT: subtle drifting dot-grid on the empty workspace ── */
+.ca-graph {
+  background-image: radial-gradient(rgba(255,90,54,0.045) 1px, transparent 1px);
+  background-size: 34px 34px;
+  animation: grid-drift 40s linear infinite;
+}
+@keyframes grid-drift {
+  from { background-position: 0 0; }
+  to   { background-position: 340px 340px; }
+}
+
+/* ── Breathing aperture rings around the empty-state icon ── */
+.ca-empty-icon {
+  position: relative;
+  width: 56px; height: 56px;
+  display: flex; align-items: center; justify-content: center;
+}
+.ca-empty-icon::before,
+.ca-empty-icon::after {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255,90,54,0.4);
+  animation: breathe 4s ease-in-out infinite;
+}
+.ca-empty-icon::after { animation-delay: 2s; }
+@keyframes breathe {
+  0%   { transform: scale(0.55); opacity: 0; }
+  35%  { opacity: 0.55; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+
+/* ── Gentle fade-up for the empty-state text ── */
+.ca-empty p {
+  opacity: 0;
+  animation: fade-up 1s ease forwards;
+  animation-delay: 0.25s;
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Respect reduced-motion preference ── */
+@media (prefers-reduced-motion: reduce) {
+  .ca-graph { animation: none; }
+  .ca-empty-icon::before, .ca-empty-icon::after { animation: none; opacity: 0.25; }
+  .ca-empty p { animation: none; opacity: 1; }
+}

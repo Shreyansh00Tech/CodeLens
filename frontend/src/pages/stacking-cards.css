@@ -1,0 +1,23 @@
+/* src/styles/stacking-cards.css */
+.stacking-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-bottom: 8rem;
+  position: relative;
+}
+
+.stacking-card {
+  position: sticky;
+  top: 6rem;
+  will-change: transform, opacity;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stacking-card-inner {
+  background: rgba(18, 16, 16, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 83, 48, 0.25);
+  box-shadow: 0 -12px 30px rgba(0, 0, 0, 0.85), 0 0 25px rgba(255, 83, 48, 0.12);
+  border-radius: 1.5rem;
+}
