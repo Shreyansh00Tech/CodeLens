@@ -233,3 +233,12 @@ Supporting CodeLens helps fund:
 - Only public GitHub repositories are supported. `/analyze` is rate limited (30 per 15 minutes per IP by default, `ANALYZE_RATE_LIMIT_MAX`).
 - Supabase keys are only needed for login / dashboard. `/analyze`, `/docs` and the landing page work without them.
 - Without `ANTHROPIC_API_KEY`, "Ask AI" runs in offline mode and returns the most relevant code locations instead of a written answer.
+
+## Deploy on Render (single service)
+
+The root `Dockerfile` builds the frontend and runs the API, which also serves the UI, so everything lives on one URL.
+
+1. Push the repo to GitHub, then Render → New → Web Service → pick the repo.
+2. Language: **Docker** (root `Dockerfile`), instance type: Free.
+3. Environment variables: `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` (optional), `ANTHROPIC_API_KEY` (optional).
+4. Deploy, then open the `.onrender.com` URL. `/health` should return `{"ok":true}`.

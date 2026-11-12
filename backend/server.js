@@ -541,6 +541,22 @@ app.post("/ask", askLimiter, async (req, res) => {
 
 app.get("/health", (req, res) => res.json({ ok: true }));
 
+// -------------------------
+// SERVE THE BUILT FRONTEND (single-service deploys, e.g. Render)
+// -------------------------
+// If frontend/dist exists (after `npm run build`), the API also serves the UI,
+// so the whole app lives on one URL. In local dev Vite serves the UI instead.
+const FRONTEND_DIST = process.env.FRONTEND_DIST ||
+  path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../frontend/dist");
+
+if (fs.existsSync(path.join(FRONTEND_DIST, "index.html"))) {
+  app.use(express.static(FRONTEND_DIST));
+  // SPA fallback for client-side routes (/analyze, /docs, /login, ...)
+  app.get(/^(?!\/(file|endpoints|flow|ask|health|assets)(\/|$)).*/, (req, res) => {
+    res.sendFile(path.join(FRONTEND_DIST, "index.html"));
+  });
+}
+
 export { app };
 
 const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);

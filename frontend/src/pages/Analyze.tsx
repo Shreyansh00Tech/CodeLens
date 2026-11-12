@@ -24,7 +24,8 @@ type Toast = { id: number; kind: "error" | "info" | "success"; text: string };
 
 const API =
   (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/$/, "") ||
-  "http://localhost:8080";
+  // Dev: Vite on :5173 talks to the local API. Production: the API serves the UI, so same origin.
+  (import.meta.env.DEV ? "http://localhost:8080" : window.location.origin);
 
 const LANG_BY_EXT: Record<string, string> = {
   ts: "typescript", tsx: "typescript", js: "javascript", jsx: "javascript", mjs: "javascript", cjs: "javascript",
