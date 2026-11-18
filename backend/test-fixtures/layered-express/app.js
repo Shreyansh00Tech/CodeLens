@@ -1,0 +1,10 @@
+import express from "express";
+import cors from "cors";
+import userRoutes from "./routes/users.js";
+import { authenticate } from "./middleware/auth.js";
+const app = express();
+app.use(cors());
+app.use(express.json());
+app.use("/api/users", authenticate, userRoutes);
+app.get("/health", (req, res) => res.json({ ok: true }));
+export default app;
